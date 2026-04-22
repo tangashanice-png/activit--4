@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dossier Charmier — Activité 4</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --parchment:     #f5e9cb;
+      --parchment-mid: #ebd9b2;
+      --parchment-deep:#dfc99a;
+      --ink:           #2a1608;
+      --ink-mid:       #5a3418;
+      --red:           #8B1A1A;
+      --gold:          #c4920c;
+      --border:        rgba(90, 55, 20, 0.38);
+      --shadow:        rgba(22, 12, 4, 0.48);
+
+      --font-heading:    'Montserrat', 'Arial Black', sans-serif;
+      --font-body:       'IM Fell English', Georgia, serif;
+      --font-typewriter: 'American Typewriter', 'Courier New', Courier, monospace;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-body);
+      background:
+        radial-gradient(ellipse at 15% 10%, rgba(176, 124, 53, 0.18) 0%, transparent 40%),
+        radial-gradient(ellipse at 85% 90%, rgba(5, 20, 10, 0.5) 0%, transparent 40%),
+        linear-gradient(160deg, #a37b2c 0%, #2e210e 50%, #071a10 100%);
+      min-height: 100vh;
+      color: var(--ink);
+      display: flex;
+      justify-content: center;
+      padding: 2.5rem 1rem;
+    }
+
+    /* ─── Card ─────────────────────────────────────────────────── */
+    .card {
+      width: min(980px, 100%);
+      background:
+        radial-gradient(circle at 7%  7%,  rgba(255,255,255,0.14) 0%, transparent 34%),
+        radial-gradient(circle at 93% 93%, rgba(80, 40, 10, 0.11) 0%, transparent 34%),
+        repeating-linear-gradient(
+          0deg,
+          rgba(110, 72, 32, 0.045) 0px, rgba(110, 72, 32, 0.045) 1px,
+          transparent 1px, transparent 9px
+        ),
+        linear-gradient(168deg, var(--parchment) 0%, var(--parchment-mid) 55%, var(--parchment-deep) 100%);
+      border: 2px solid var(--border);
+      border-radius: 3px;
+      padding: 3.5rem 3rem 3rem;
+      box-shadow:
+        0 28px 65px rgba(0,0,0,0.55),
+        inset 0 0 55px rgba(105, 62, 18, 0.06);
+      position: relative;
+      align-self: flex-start;
+    }
+
+    /* Inner dashed frame */
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 15px;
+      border: 1px dashed rgba(90, 55, 20, 0.26);
+      border-radius: 1px;
+      pointer-events: none;
+    }
+
+    /* Diamond top ornament */
+    .card::after {
+      content: '◆';
+      position: absolute;
+      top: -0.65em;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--parchment);
+      padding: 0 0.7rem;
+      color: var(--red);
+      font-size: 1rem;
+      line-height: 1;
+    }
+
+    /* ─── Header band ─────────────────────────────────────────── */
+    .header-band {
+      text-align: center;
+      margin-bottom: 2rem;
+      padding-bottom: 1.6rem;
+      border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+
+    .header-band::after {
+      content: '— ✦ —';
+      position: absolute;
+      bottom: -0.65em;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--parchment);
+      padding: 0 0.9rem;
+      color: var(--red);
+      font-size: 0.78rem;
+      letter-spacing: 0.35em;
+    }
+
+    .activity-label {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 0.62rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 0.6rem;
+    }
+
+    h1 {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      color: var(--ink-mid);
+      letter-spacing: -0.025em;
+      text-shadow: 1px 2px 0 rgba(255, 244, 210, 0.85);
+      line-height: 1.1;
+      text-align: center;
+    }
+
+    /* ─── Audio ─────────────────────────────────────────────── */
+    .audio-player {
+      margin: 1.5rem auto;
+      display: flex;
+      justify-content: center;
+    }
+
+    audio {
+      width: 100%;
+      max-width: 480px;
+      filter: sepia(0.35);
+    }
+
+    /* ─── Instruction ─────────────────────────────────────────── */
+    .instruction {
+      margin: 0 auto 1.4rem;
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 0.68rem;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--ink-mid);
+      text-align: center;
+    }
+
+    /* ─── Quiz box ─────────────────────────────────────────────── */
+    .quiz {
+      background: rgba(255, 250, 228, 0.58);
+      border: 1px solid rgba(100, 65, 22, 0.22);
+      border-radius: 2px;
+      padding: 1.6rem 1.8rem;
+      margin-bottom: 1.4rem;
+    }
+
+    .quiz p {
+      font-family: var(--font-body);
+      font-size: 1.08rem;
+      line-height: 2.2;
+      color: var(--ink-mid);
+      margin: 0 0 0.8rem;
+    }
+
+    .quiz input[type="text"] {
+      font-family: var(--font-typewriter);
+      font-size: 0.95rem;
+      width: 11rem;
+      padding: 0.25rem 0.5rem;
+      border: 1.5px solid rgba(90, 55, 20, 0.38);
+      border-radius: 2px;
+      background: rgba(255, 253, 240, 0.9);
+      color: var(--ink);
+      transition: border-color 0.2s;
+    }
+
+    .quiz input[type="text"]:focus {
+      outline: none;
+      border-color: var(--gold);
+      background: rgba(255, 255, 245, 0.96);
+    }
+
+    /* ─── Button ─────────────────────────────────────────────── */
+    .btn-wrap {
+      text-align: center;
+      margin-top: 1.2rem;
+    }
+
+    .btn {
+      font-family: var(--font-heading);
+      font-weight: 900;
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      padding: 0.85rem 2.2rem;
+      background: linear-gradient(170deg, #8c6032 0%, #5c3918 100%);
+      color: #f5e8c8;
+      border: 1px solid rgba(55, 32, 10, 0.55);
+      border-radius: 2px;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 14px rgba(28, 14, 4, 0.25), inset 0 1px 0 rgba(255, 240, 195, 0.18);
+    }
+
+    .btn:hover {
+      background: linear-gradient(170deg, #9c7040 0%, #6c4820 100%);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 18px rgba(28, 14, 4, 0.32);
+    }
+
+    /* ─── Message ─────────────────────────────────────────────── */
+    .message {
+      text-align: center;
+      margin: 1rem 0 0;
+      font-style: italic;
+      font-size: 1.05rem;
+      line-height: 1.65;
+      color: var(--red);
+      min-height: 1.4rem;
+    }
+
+    /* ─── Mobile ─────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      body {
+        padding: 1rem 0.4rem;
+      }
+
+      .card {
+        padding: 2.2rem 1.1rem 1.8rem;
+      }
+
+      h1 {
+        font-size: 1.3rem;
+      }
+
+      .quiz {
+        padding: 1rem 0.8rem;
+        font-size: 0.95rem;
+      }
+
+      .quiz p {
+        font-size: 1rem;
+        line-height: 2.4;
+      }
+
+      .quiz input[type="text"] {
+        width: 6rem;
+        font-size: 0.85rem;
+        padding: 0.2rem 0.3rem;
+      }
+
+      .instruction {
+        font-size: 0.6rem;
+        letter-spacing: 0.18em;
+      }
+
+      .btn {
+        font-size: 0.65rem;
+        padding: 0.75rem 1.4rem;
+      }
+
+      audio {
+        max-width: 100%;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <main class="card">
+
+    <div class="header-band">
+      <p class="activity-label">Le Dossier Charmier — Activité IV</p>
+      <h1>Reconstitution du Dossier Charmier</h1>
+    </div>
+
+    <section class="audio-player">
+      <audio controls preload="metadata">
+        <source src="Activité 4 audiofinale.MP3" type="audio/wav" />
+        Votre navigateur ne supporte pas l'élément audio.
+      </audio>
+    </section>
+
+    <div class="archive-section" style="text-align: center; margin: 1.5rem 0;">
+        <p style="margin-bottom: 0.8rem;">Pour vous aider, les archives de l'enquêteur Richard Bartle.</p>
+            <a href="Archives-activités 4.pdf" download style="text-decoration: none;">
+                <button class="btn">Consulter les Archives</button>
+            </a>
+    </div>
+
+    <p class="instruction">Complétez le texte puis cliquez sur Vérifier</p>
+
+    <section class="quiz">
+      <p>« Le <input id="q1" type="text" /> février <input id="q2" type="text" /> , par une nuit sans <input id="q3" type="text" /> , Émile Charmier et <input id="q4" type="text" /> autres bagnards volèrent une chaloupe au fort <input id="q5" type="text" /> . Cela faisait <input id="q6" type="text" /> mois qu'ils préparaient cette évasion dans le plus grand secret, fabriquant des voiles avec des <input id="q7" type="text" /> et du linge.</p>
+      <p>La traversée fut rude. Une <input id="q8" type="text" /> s'abattit sur leur embarcation, endommageant les <input id="q9" type="text" /> . Un navire de secours, le <input id="q10" type="text" /> , leur fournit du riz, des biscuits, de l'eau et du <input id="q11" type="text" /> .</p>
+      <p>Après <input id="q12" type="text" /> jours en mer, Émile et ses compagnons accostèrent à <input id="q13" type="text" /> , en Australie. Il abandonna son identité et se fit appeler "Baron <input id="q14" type="text" />".</p>
+      <p>En <input id="q15" type="text" /> , il se présenta dans le <input id="q16" type="text" /> comme ancien professeur de l'Université française de <input id="q17" type="text" /> . Il fut naturalisé australien le <input id="q18" type="text" /> novembre <input id="q19" type="text" /> , déclarant la profession d'<input id="q20" type="text" /> .</p>
+      <p>En <input id="q21" type="text" /> , Émile avait épousé <input id="q22" type="text" /> Elizabeth Lawrence à Rockhampton. Sur l'acte de mariage, il se déclara <input id="q23" type="text" /> , cachant ainsi son premier mariage en France. Ensemble, ils eurent <input id="q24" type="text" /> enfants.</p>
+      <p>Le <input id="q25" type="text" /> juin <input id="q26" type="text" /> , la vie d'Émile bascula de nouveau. Sa femme <input id="q27" type="text" /> mourut tragiquement : sa longue robe avait pris <input id="q28" type="text" /> lors du nettoyage du linge. Moins d'un an plus tard, le <input id="q29" type="text" /> avril <input id="q30" type="text" /> , Émile se remaria avec <input id="q31" type="text" /> Needham. Il mourut le <input id="q32" type="text" /> juillet <input id="q33" type="text" /> à <input id="q34" type="text" /> , Queensland, à l'âge de <input id="q35" type="text" /> ans. »</p>
+    </section>
+
+    <div class="btn-wrap">
+      <button class="btn" id="checkBtn">Vérifier</button>
+    </div>
+
+    <p class="message" id="message"></p>
+
+    <div class="btn-wrap" id="successBtnWrap" style="display:none;">
+      <a class="btn" href="reussite.html">Page de réussite</a>
+    </div>
+
+    <div class="btn-wrap" id="errorBtnWrap" style="display:none;">
+      <a class="btn" href="erreur.html" style="background: linear-gradient(170deg, #962020 0%, #5e1010 100%); border-color: rgba(60,10,10,0.5);">Voir les erreurs</a>
+    </div>
+
+  </main>
+
+  <script>
+    const answers = {
+      q1: '15', q2: '1879', q3: 'lune', q4: '10', q5: 'téremba', q6: '3', q7: 'hamacs',
+      q8: 'tempête', q9: 'provisions', q10: 'helen a. rawlins', q11: 'tabac',
+      q12: 'seize', q13: 'cape moreton', q14: 'de chastel', q15: '1882', q16: 'morning bulletin',
+      q17: 'besançon', q18: '23', q19: '1883', q20: 'enseignant', q21: '1880',
+      q22: 'ann', q23: 'veuf', q24: 'six', q25: '18', q26: '1894', q27: 'ann',
+      q28: 'feu', q29: '15', q30: '1895', q31: 'agnes', q32: '14', q33: '1919',
+      q34: 'rockhampton', q35: '74'
+    };
+
+    const checkBtn = document.getElementById('checkBtn');
+    const message = document.getElementById('message');
+    const successBtnWrap = document.getElementById('successBtnWrap');
+    const errorBtnWrap = document.getElementById('errorBtnWrap');
+
+    checkBtn.addEventListener('click', () => {
+      let allCorrect = true;
+      let filled = true;
+
+      Object.keys(answers).forEach((key) => {
+        const input = document.getElementById(key);
+        const value = input.value.trim().toLowerCase();
+        if (value === '') {
+          filled = false;
+          input.style.borderColor = '#b42018';
+          return;
+        }
+        if (value !== answers[key].toLowerCase()) {
+          allCorrect = false;
+          input.style.borderColor = '#b42018';
+        } else {
+          input.style.borderColor = '#2a6e2a';
+        }
+      });
+
+      if (!filled) {
+        message.textContent = 'Veuillez remplir toutes les cases avant de vérifier.';
+        message.style.color = '#b42018';
+        successBtnWrap.style.display = 'none';
+        errorBtnWrap.style.display = 'block';
+        return;
+      }
+
+      if (!allCorrect) {
+        message.textContent = 'Certaines réponses sont incorrectes, réessayez !';
+        message.style.color = '#b42018';
+        successBtnWrap.style.display = 'none';
+        errorBtnWrap.style.display = 'block';
+        return;
+      }
+
+      message.textContent = 'Bravo à vous ! Je suis Émile Charmier, et je vous félicite sincèrement. Vous avez su retracer mon histoire avec attention et découvrir la réalité du bagne et la culture qui l\'entoure. Merci pour votre participation à ce jeu interactif et pour votre curiosité. Grâce à vous, cette mémoire continue de vivre.';
+      message.style.color = '#2a6e2a';
+      successBtnWrap.style.display = 'block';
+      errorBtnWrap.style.display = 'none';
+    });
+  </script>
+</body>
+</html>
